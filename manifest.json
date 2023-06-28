@@ -1,0 +1,43 @@
+{
+    "name": "danime-assign-mediakey",
+    "description": "dアニメストアの動画をキーボード等のメディアキーから操作可能にします。",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "permissions": [
+        "tabs"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [{
+        "matches": [
+            "https://animestore.docomo.ne.jp/animestore/*"
+        ],
+        "js": [
+            "content_scripts.js"
+        ]
+    }],
+    "commands": {
+        "pause": {
+            "description": "pause",
+            "global": true,
+            "suggested_key": {
+                "default": "MediaPlayPause"
+            }
+        },
+        "prev-track": {
+            "description": "prev",
+            "global": true,
+            "suggested_key": {
+                "default": "MediaPrevTrack"
+            }
+        },
+        "next-track": {
+            "description": "next",
+            "global": true,
+            "suggested_key": {
+                "default": "MediaNextTrack"
+            }
+        }
+    }
+}
