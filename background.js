@@ -30,6 +30,7 @@ chrome.tabs.onUpdated.addListener(async (tabid, changeInfo, tab) => {
 })
 
 chrome.tabs.onRemoved.addListener(async () => {
+    lastActiveTab = null
     const tabs = await chrome.tabs.query({})
     tabs.forEach(tab => {
         if (new RegExp(targetUrl).exec(tab. url)) {
@@ -39,5 +40,6 @@ chrome.tabs.onRemoved.addListener(async () => {
 })
 
 chrome.commands.onCommand.addListener(async (command) => {
+    if (lastActiveTab === null) return
     chrome.tabs.sendMessage(lastActiveTab.id, command)
 })
